@@ -120,6 +120,14 @@
             android:textSize="@dimen/_13ssp"
             tools:ignore="HardcodedText" />
 
+        <EditText
+            android:id="@+id/inputDateOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:hint="Date of Birth (dd/mm/yyyy)"
+            android:inputType="date" />
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
