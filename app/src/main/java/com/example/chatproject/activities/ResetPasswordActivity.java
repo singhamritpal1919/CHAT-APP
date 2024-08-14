@@ -51,6 +51,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
 //            resetPassword(code, newPassword);
 //        });
 
+        binding.buttonBackToSignUp.setOnClickListener(v -> {
+            Intent intent = new Intent(ResetPasswordActivity.this, SignUpActivity.class);
+            startActivity(intent);
+            finish(); // Close the ResetPasswordActivity
+        });
+
         binding.buttonBackToSignIn.setOnClickListener(v -> {
             Intent intent = new Intent(ResetPasswordActivity.this, SignInActivity.class);
             startActivity(intent);
