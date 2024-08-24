@@ -40,12 +40,12 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
     }
 
     public void getUsers(){
-        loading(true);
+//        loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .get()
                 .addOnCompleteListener(task -> {
-                    loading(false);
+//                    loading(false);
                     String currentUserId = preferenceManager.getString(Constants.KEY_USER_ID);
                     if(task.isSuccessful() && task.getResult() != null){
                         List<User> users = new ArrayList<>();
@@ -79,13 +79,13 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
         binding.textErrorMessage.setVisibility(View.VISIBLE);
     }
 
-    private void loading(Boolean isLoading){
-        if(isLoading){
-            binding.progressBar2.setVisibility(View.VISIBLE);
-        }else {
-            binding.progressBar2.setVisibility(View.INVISIBLE);
-        }
-    }
+//    private void loading(Boolean isLoading){
+//        if(isLoading){
+//            binding.progressBar2.setVisibility(View.VISIBLE);
+//        }else {
+//            binding.progressBar2.setVisibility(View.INVISIBLE);
+//        }
+//    }
 
     @Override
     public void onUserClicked(User user) {
