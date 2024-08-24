@@ -127,22 +127,28 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.chatproject.R;
 import com.example.chatproject.activities.utilities.Constants;
 import com.example.chatproject.activities.utilities.PreferenceManager;
 import com.example.chatproject.adapters.RecentConversationsAdapter;
 import com.example.chatproject.databinding.ActivityMainBinding;
+import com.example.chatproject.listeners.ConversionListener;
 import com.example.chatproject.models.ChatMessage;
+import com.example.chatproject.models.User;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ConversionListener {
 
     private ActivityMainBinding binding;
     private PreferenceManager preferenceManager;
@@ -159,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
         init();
         loadUserDetails();
+//        getToken();
+        listenConversations();
 
         binding.buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,8 +190,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         conversations = new ArrayList<>();
-        conversationsAdapter = new RecentConversationsAdapter(conversations);
+        conversationsAdapter = new RecentConversationsAdapter(conversations, this);
         binding.conversationsRecyclerView.setAdapter(conversationsAdapter);
+
+        binding.conversationsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         database = FirebaseFirestore.getInstance();
     }
 
@@ -230,6 +240,14 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    private void listenConversations(){
+        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
+                .whereEqualTo(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
+                .addSnapshotListener(eventListener);
+        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
+                .whereEqualTo(Constants.KEY_RECEIVER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
+                .addSnapshotListener(eventListener);
+    }
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
       if(error != null) {
           return;
@@ -268,6 +286,31 @@ public class MainActivity extends AppCompatActivity {
                   }
               }
           }
+          Collections.sort(conversations, (obj1,obj2) -> obj2.dateObject.compareTo(obj1.dateObject));
+          conversationsAdapter.notifyDataSetChanged();
+          binding.conversationsRecyclerView.smoothScrollToPosition(0);
+          binding.conversationsRecyclerView.setVisibility(View.VISIBLE);
+//          binding.progressBar.setVisibility(View.GONE);
       }
     };
+
+    private void getToken() {
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::showToast);
+    }
+
+    private void updateToken(String token) {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = database.collection(Constants.KEY_COLLECTION_USERS).document(
+                preferenceManager.getString(Constants.KEY_USER_ID)
+        );
+        documentReference.update(Constants.KEY_FCM_TOKEN, token)
+                .addOnFailureListener(e -> showToast("Unable to update token"));
+    }
+
+    @Override
+    public void onConversionClicked(User user) {
+        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+        intent.putExtra(Constants.KEY_USER, user);
+        startActivity(intent);
+    }
 }
