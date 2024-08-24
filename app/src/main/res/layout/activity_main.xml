@@ -1,93 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<!--<LinearLayout-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="@color/primary"-->
-<!--    tools:context=".activities.MainActivity">-->
-
-
-
-
-
-
-
-
-
-<!--    <com.google.android.material.imageview.ShapeableImageView-->
-<!--        android:id="@+id/imageProfile1"-->
-<!--        android:layout_width="60dp"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:background="@drawable/background_icon"-->
-<!--        android:scaleType="centerCrop"-->
-
-
-<!--        />-->
-
-
-
-<!--&lt;!&ndash;    <Button&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/buttonSignOut"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:text="Sign Out"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_marginBottom="16dp"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_marginEnd="16dp"/>&ndash;&gt;-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textName1"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:layout_marginLeft="30dp"-->
-<!--        android:ellipsize="end"-->
-<!--        android:gravity="center"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="15dp"-->
-<!--        android:textStyle="bold"-->
-
-<!--         />-->
-
-<!--    <androidx.appcompat.widget.AppCompatImageView-->
-<!--        android:id="@+id/imageSignOut"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:background="@drawable/background_icon"-->
-<!--        android:padding="@dimen/_6sdp"-->
-<!--        android:src="@drawable/ic_logout"-->
-
-<!--        android:tint="@color/white"-->
-<!--        />-->
-
-
-
-
-
-<!--</LinearLayout>-->
-
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
+    android:background="@color/white"
     tools:context=".activities.MainActivity">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageProfile1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:scaleType="centerCrop"
@@ -99,10 +25,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="10dp"
         android:text="Name"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/imageProfile1"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,24 +37,37 @@
         android:id="@+id/buttonSignOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="684dp"
+
+        android:layout_marginStart="165dp"
+        android:layout_marginBottom="770dp"
         android:text="Sign Out"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/textName1" />
+
+
 
     <FrameLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:background="@drawable/background_content_bottom"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/_60sdp"
         app:layout_constraintTop_toBottomOf="@id/imageProfile1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        >
-
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/conversationsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="0dp"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
     </FrameLayout>
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabNewChat"
@@ -135,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_24sdp"
         android:layout_marginRight="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_add"
         android:backgroundTint="@color/purple_200"
@@ -143,3 +84,12 @@
         android:tint="@color/white"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
