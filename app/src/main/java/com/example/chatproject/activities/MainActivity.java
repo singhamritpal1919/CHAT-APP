@@ -129,12 +129,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.chatproject.R;
 import com.example.chatproject.activities.utilities.Constants;
 import com.example.chatproject.activities.utilities.PreferenceManager;
 import com.example.chatproject.adapters.RecentConversationsAdapter;
 import com.example.chatproject.databinding.ActivityMainBinding;
-import com.example.chatproject.listeners.ConversionListener;
 import com.example.chatproject.models.ChatMessage;
 import com.example.chatproject.models.User;
 import com.google.firebase.firestore.DocumentChange;
