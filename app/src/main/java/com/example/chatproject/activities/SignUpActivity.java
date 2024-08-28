@@ -304,7 +304,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     private int calculateAge(String dateOfBirth) {
-        // Parse the date of birth
+
         String[] dobParts = dateOfBirth.split("/");
         int day = Integer.parseInt(dobParts[0]);
         int month = Integer.parseInt(dobParts[1]);
