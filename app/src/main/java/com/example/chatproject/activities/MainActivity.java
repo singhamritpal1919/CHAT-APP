@@ -131,6 +131,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.chatproject.activities.utilities.Constants;
 import com.example.chatproject.activities.utilities.PreferenceManager;
+import com.example.chatproject.adapters.ConversionListener;
 import com.example.chatproject.adapters.RecentConversationsAdapter;
 import com.example.chatproject.databinding.ActivityMainBinding;
 import com.example.chatproject.models.ChatMessage;
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements ConversionListene
         preferenceManager = new PreferenceManager(getApplicationContext());
         init();
         loadUserDetails();
-//        getToken();
+
         listenConversations();
 
         binding.buttonSignOut.setOnClickListener(new View.OnClickListener() {
@@ -288,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements ConversionListene
           conversationsAdapter.notifyDataSetChanged();
           binding.conversationsRecyclerView.smoothScrollToPosition(0);
           binding.conversationsRecyclerView.setVisibility(View.VISIBLE);
-//          binding.progressBar.setVisibility(View.GONE);
+
       }
     };
 
@@ -311,4 +312,5 @@ public class MainActivity extends AppCompatActivity implements ConversionListene
         intent.putExtra(Constants.KEY_USER, user);
         startActivity(intent);
     }
+
 }
