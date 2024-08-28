@@ -8,5 +8,5 @@ public class Message {
 
     public Message() {}
 
-    // Getters and setters
+
 }
