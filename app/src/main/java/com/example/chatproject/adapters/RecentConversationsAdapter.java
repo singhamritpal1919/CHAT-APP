@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chatproject.databinding.ItemContainerRecentConversionBinding;
-import com.example.chatproject.listeners.ConversionListener;
 import com.example.chatproject.models.ChatMessage;
 import com.example.chatproject.models.User;
 
