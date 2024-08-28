@@ -104,7 +104,7 @@
 //}
 
 package com.example.chatproject.activities;
-//
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -327,20 +327,7 @@ public class SignInActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-//        String email = binding.inputEmail.getText().toString().trim();
-//        if (email.isEmpty()) {
-//            showToast("Please enter your email to reset password");
-//            return;
-//        }
-//
-//        firebaseAuth.sendPasswordResetEmail(email)
-//                .addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        showToast("Password reset email sent");
-//                    } else {
-//                        showToast("Error in sending password reset email");
-//                    }
-//                });
+
     }
 
     private void loading(Boolean isLoading) {
