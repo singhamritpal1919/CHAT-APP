@@ -79,13 +79,7 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
         binding.textErrorMessage.setVisibility(View.VISIBLE);
     }
 
-//    private void loading(Boolean isLoading){
-//        if(isLoading){
-//            binding.progressBar2.setVisibility(View.VISIBLE);
-//        }else {
-//            binding.progressBar2.setVisibility(View.INVISIBLE);
-//        }
-//    }
+
 
     @Override
     public void onUserClicked(User user) {
